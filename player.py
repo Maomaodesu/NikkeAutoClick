@@ -1,7 +1,7 @@
+import math
 import os
 import random
 import time
-import math
 import cv2
 import numpy
 import pyautogui
@@ -27,8 +27,9 @@ def load_img_dictionary(task_name):
     return img_dictionary
 
 # 截图并转化为截图多维数组
-def get_screen_nd_array(name='screen'):
-    screen_img = ImageGrab.grab()
+# 修改 get_screen_nd_array 截取指定区域
+def get_screen_nd_array(name='screen', bbox=(0,0,1021,803)):  # 设置默认截取区域
+    screen_img = ImageGrab.grab(bbox=bbox)  # 添加区域限制
     if name != 'screen':
         screen_img.save(f'{base_dir}\\screen\\{name}.jpg')
     # 将截图从PIL图像转换为N-dimensional array多维数组，然后将颜色空间从RGB转换为BGR（OpenCV默认使用BGR）
