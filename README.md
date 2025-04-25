@@ -1,4 +1,5 @@
-a python project for PC Nikke game to gain resources with window of 1021x803
+if you cant read thess English discribtions try to translate the Chinese info.
+a python project for PC Nikke game to gain resources with window of 1021x803 and move your game to the left top of your screen
 
 step1
 to run this project you need to install python 3.9.x and pycharm or vscode
@@ -18,7 +19,7 @@ step4
 for the best running state you better use the background named emergency measures of Marian
 
 
-nikke pc端收菜脚本，分辨率要调整为 1021x803 下才能识别。 
+nikke pc端收菜脚本，分辨率要调整为 1021x803 下才能识别, 需要把游戏放在屏幕的左上角，上侧和左侧边沿贴着你的显示器。 
 
 第一步
 安装python 3.9.x 和 pycharm或者vscode
