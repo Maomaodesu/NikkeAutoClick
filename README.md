@@ -7,9 +7,13 @@ to run this project you need to install python 3.9.x and pycharm or vscode
 setp2
 to init this project you need to run these commands in terminal
 python -m pip install --upgrade pip
+
 pip install numpy
+
 pip install ImageGrab
+
 pip install pyautogui
+
 pip install opencv-python    
 
 step3
@@ -26,10 +30,15 @@ nikke pc端收菜脚本，分辨率要调整为 1021x803 下才能识别, 需要
 
 第二步
 在pycharm的控制台中运行这些命令
+
 python -m pip install --upgrade pip
+
 pip install numpy
+
 pip install ImageGrab
+
 pip install pyautogui
+
 pip install opencv-python    
 
 第三步
