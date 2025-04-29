@@ -56,7 +56,7 @@ def simulation_room():
     else:
         player.match_and_click_with_delay('simulation_close', 3)
     # 返回主页
-    front_player.match_and_click_with_delay('HOME', 3)
+    home()
 
 
 # 免费商店
@@ -83,54 +83,18 @@ def free_shop():
     else:
         front_player.match_and_click_with_delay('REWARD', 2)
     # 位置1
-    free_shop_detect_loop(front_player, player,0, 110)
+    free_shop_detect_loop(player, 0, 110)
     # 位置2
-    free_shop_detect_loop(front_player, player,0, 220)
+    free_shop_detect_loop(player, 0, 220)
     # 位置3
-    free_shop_detect_loop(front_player, player,0, 330)
+    free_shop_detect_loop(player, 0, 330)
     # 位置4
-    free_shop_detect_loop(front_player, player, 0, 440)
-    front_player.match_and_click_with_delay('RETURN', 2)
-
-    # # 位置2
-    # player.match_and_click_by_order_with_shift([
-    #     ('arena_shop_unselected', 0, 0),
-    #     ('arena_shop_selected', 0, 220)
-    # ])
-    # player.match_and_click_with_delay('arena_shop_purchase', 0.3)
-    # if player.match('free_shop_insufficient_funds') is not None:
-    #     time.sleep(1)
-    #     front_player.match_and_click_with_delay('arena_shop_purchase_cancel', 2)
-    # else:
-    #     front_player.match_and_click_with_delay('REWARD', 2)
-    #
-    # # 位置3
-    # player.match_and_click_by_order_with_shift([
-    #     ('arena_shop_unselected', 0, 0),
-    #     ('arena_shop_selected', 0, 330)
-    # ])
-    # player.match_and_click_with_delay('arena_shop_purchase', 0.3)
-    # if player.match('free_shop_insufficient_funds') is not None:
-    #     time.sleep(1)
-    #     front_player.match_and_click_with_delay('arena_shop_purchase_cancel', 2)
-    # else:
-    #     front_player.match_and_click_with_delay('REWARD', 2)
-    #
-    # # 位置4
-    # player.match_and_click_by_order_with_shift([
-    #     ('arena_shop_unselected', 0, 0),
-    #     ('arena_shop_selected', 0, 440)
-    # ])
-    # player.match_and_click_with_delay('arena_shop_purchase', 0.3)
-    # if player.match('free_shop_insufficient_funds') is not None:
-    #     time.sleep(1)
-    #     front_player.match_and_click_with_delay('arena_shop_purchase_cancel', 2)
-    # else:
-    #     front_player.match_and_click_with_delay('REWARD', 2)
-    #     front_player.match_and_click_with_delay('RETURN', 2)
+    free_shop_detect_loop(player, 0, 440)
+    # 返回主页
+    home()
 
 
-def free_shop_detect_loop(front_player, player, direction, distance):
+def free_shop_detect_loop(player, direction, distance):
     # 定位到商品并点击
     player.match_and_click_by_order_with_shift([
         ('arena_shop_unselected', 0, 0),
@@ -196,7 +160,8 @@ def paid_shop():
         paid_shop_free_diamond_monthly_sold_out = player.match('paid_shop_free_diamond_monthly_sold_out')
         if paid_shop_free_diamond_monthly_sold_out:
             monthly = True
-    player.match_and_click_with_delay('paid_shop_return', 1)
+    player.match_and_click_with_delay('paid_shop_clothes_rack', 3)
+    home()
 
 
 # 咨询
@@ -254,7 +219,7 @@ def consult():
                 # 结束咨询动画并翻页
                 player.match_and_click_by_order(['nikke_consult_next'])
     # 咨询结束，返回主页
-    front_player.match_and_click_by_order(['HOME'])
+    home()
 
 
 # 新人竞技场
@@ -271,14 +236,14 @@ def arena():
         attempt += 1
     if arena_session_end_status is not None:
         time.sleep(1)
-        front_player.match_and_click_with_delay('HOME', 2)
+        home()
     else:
         while True:
             arena_beginner_logo = player.match('arena_beginner_logo')
             arena_beginner_battle_free = player.match('arena_beginner_battle_free')
             if arena_beginner_logo is not None:
                 if arena_beginner_battle_free is None:
-                    front_player.match_and_click_by_order(['HOME'])
+                    home()
                     break
             player.match_and_click_by_order_with_shift([
                 ('arena_beginner_battle_free', 90, 220),
@@ -304,7 +269,7 @@ def interception():
     interception_end_detect(player, 'interception_battle', 180)
     interception_end_detect(player, 'interception_fast_battle', 5)
     interception_end_detect(player, 'interception_fast_battle', 5)
-    front_player.match_and_click_with_delay('HOME', 3)
+    home()
 
 
 def interception_end_detect(player, button_name, wait_second):
@@ -320,6 +285,13 @@ def mission():
     front_player.match_and_click_by_order(['mission', 'mission_get_all', 'mission_get_all', 'REWARD', 'mission_close'])
 
 
+def home():
+    count = 0
+    while count < 3:
+        count = count + 1
+        front_player.match_and_click_with_delay('HOME', 3)
+
+
 # 日常
 def daily_task():
     # 付费商店
@@ -328,6 +300,10 @@ def daily_task():
 
     # 新人竞技场
     arena()
+    time.sleep(5)
+
+    # 免费商店
+    free_shop()
     time.sleep(5)
 
     # 防御前哨基地 一举歼灭 获取奖励
@@ -344,10 +320,6 @@ def daily_task():
 
     # 远征
     trip()
-    time.sleep(5)
-
-    # 免费商店
-    free_shop()
     time.sleep(5)
 
     # 咨询
